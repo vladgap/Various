@@ -5,9 +5,31 @@ from plotly.subplots import make_subplots
 from sklearn import preprocessing
 from MLNN import *
 
-vladgap_tools_version = '0.1'
+vladgap_tools_version = '0.2'
 print(f'Version of vladgap_tools is {vladgap_tools_version}')
 
+def CopyPasteToPandas(a):
+    if a.startswith('\n'):
+        a = a[1:]
+    if a.endswith('\n'):
+        a = a[:-1]
+    rows = a.split('\n')
+    data = []
+    for row in rows:
+        parts = row.split('\t')
+        parsed_row = []
+        for item in parts:
+            item = item.strip()
+            try:
+                # נסה להמיר ל-int או float
+                if '.' in item:
+                    parsed_row.append(float(item))
+                else:
+                    parsed_row.append(int(item))
+            except ValueError:
+                parsed_row.append(item)
+        data.append(parsed_row)
+    return data
 
 def CopyPasteToArray(a):
     if a.startswith('\n'):
