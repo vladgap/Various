@@ -145,3 +145,18 @@ def round_to_significant_digits(num, keep_int=False):
         return float(f'{num:.2g}')        # 2 significant digits
     else: # abs_num < 0.01
         return float(f'{num:.1g}')        # 1 significant digit
+
+def apply_rounding_to_structure(data_structure, rounding_func, **kwargs):
+    if isinstance(data_structure, pd.DataFrame):
+        # For DataFrames, map is used, and kwargs can be passed directly
+        return data_structure.map(lambda x: rounding_func(x, **kwargs))
+    elif isinstance(data_structure, list):
+        rounded_list_of_lists = []
+        for inner_list in data_structure:
+            rounded_inner_list = []
+            for item in inner_list:
+                rounded_inner_list.append(rounding_func(item, **kwargs))
+            rounded_list_of_lists.append(rounded_inner_list)
+        return rounded_list_of_lists
+    else:
+        raise TypeError("Input must be a pandas DataFrame or a list of lists")
