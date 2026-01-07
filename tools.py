@@ -5,7 +5,7 @@ from plotly.subplots import make_subplots
 from sklearn import preprocessing
 from MLNN import *
 
-vladgap_tools_version = '0.2'
+vladgap_tools_version = '0.3'
 print(f'Version of vladgap_tools is {vladgap_tools_version}')
 
 def CopyPasteToPandas(a):
@@ -130,3 +130,18 @@ def export_weights_as_pandas(bp):
     for i in a:
         b=pd.concat([b,pd.DataFrame(i)], axis=0)
     return b
+
+def round_to_significant_digits(num, keep_int=False):
+    if keep_int and isinstance(num, int):
+        return num
+    if not isinstance(num, (int, float)):
+        return num  # Return non-numeric types as is
+    abs_num = abs(num)
+    if abs_num >= 100:
+        return round(num)    # Existing rules for numbers less than 100
+    elif abs_num >= 0.1:
+        return float(f'{num:.3g}')        # 3 significant digits
+    elif 0.01 <= abs_num < 0.1:
+        return float(f'{num:.2g}')        # 2 significant digits
+    else: # abs_num < 0.01
+        return float(f'{num:.1g}')        # 1 significant digit
