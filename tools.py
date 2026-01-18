@@ -5,7 +5,7 @@ from plotly.subplots import make_subplots
 from sklearn import preprocessing
 from MLNN import *
 
-vladgap_tools_version = '0.3'
+vladgap_tools_version = '0.4'
 print(f'Version of vladgap_tools is {vladgap_tools_version}')
 
 def CopyPasteToPandas(a):
@@ -162,4 +162,5 @@ def apply_rounding_to_structure(data_structure, rounding_func, **kwargs):
         return rounded_list_of_lists
     else:
         raise TypeError("Input must be a pandas DataFrame or a list of lists")
+
 
