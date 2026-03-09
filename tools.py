@@ -5,8 +5,8 @@ from plotly.subplots import make_subplots
 from sklearn import preprocessing
 from MLNN import *
 
-vladgap_tools_version = '0.4'
-print(f'Version of vladgap_tools is {vladgap_tools_version}')
+tools_version = '1.0'
+print(f'Version of tools is {tools_version}')
 
 def CopyPasteToPandas(a):
     if a.startswith('\n'):
@@ -122,6 +122,7 @@ class Fit2to1:
                       aspectratio=dict(x=1, y=1, z=1)
                       )
     fig.update_scenes(camera_projection_type="orthographic")
+    self.fig = fig
 
     fig.show()
 
@@ -162,5 +163,3 @@ def apply_rounding_to_structure(data_structure, rounding_func, **kwargs):
         return rounded_list_of_lists
     else:
         raise TypeError("Input must be a pandas DataFrame or a list of lists")
-
-
