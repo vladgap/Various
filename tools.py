@@ -5,7 +5,7 @@ from plotly.subplots import make_subplots
 from sklearn import preprocessing
 from MLNN import *
 
-tools_version = '2.0'
+tools_version = '2.1'
 print(f' Version of tools is {tools_version}\n',
       'class NN2to1 -- without external scaler')
 
@@ -52,10 +52,10 @@ def CopyPasteToArray(a):
 
 class NN2to1:
   def __init__(self, X, T, mesh, confidences=None, hidden_layers=1, hidden_activation='linear'):
-    self.X=np.array(X).astype(float)
-    self.T=np.array(T).astype(float)
-    self.mesh=np.array(mesh).astype(float)
-    self.confidences=np.array(confidences).astype(float)
+    self.X=X
+    self.T=T
+    self.mesh=mesh
+    self.confidences=confidences
     self.hidden_layers=hidden_layers
     self.hidden_activation=hidden_activation
     self.network=NN(layers=[2,hidden_layers,1], hidden_activation = hidden_activation)
